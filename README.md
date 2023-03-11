@@ -10,6 +10,14 @@ if website icon is `.png` `.svg`... , this repo will convert it to `.ico(64x64)`
 
 ## use
 
+### cli (recommended)
+
+1. install nodejs `https://nodejs.org/`
+2. `cmd` run command `npm i url-icon -g`
+3. `cmd` run command `url-icon ${urlDir} ${iconDir}`
+
+### script
+
 1. install nodejs `https://nodejs.org/`
 2. `cmd` to current dir
 3. run `npm i` install dependencies

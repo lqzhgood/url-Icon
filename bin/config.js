@@ -1,22 +1,15 @@
-import { IConfig } from './types/index.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import fs from 'node:fs';
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 const [inputDir, iconDir] = process.argv.splice(2);
-
-const config: IConfig = {
+const config = {
     input: inputDir ?? path.join(__dirname, 'input'),
     iconDir: iconDir ?? path.join(__dirname, 'icons'),
     // input: path.resolve('D:\\My_Cloud\\Other\\IE'),
     // iconDir: path.resolve('D:\\My_Cloud\\Other\\IE_icons'),
 };
-
 if (!fs.existsSync(config.iconDir)) {
     fs.mkdirSync(config.iconDir);
 }
-
 export default config;

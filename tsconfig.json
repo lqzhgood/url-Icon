@@ -4,9 +4,11 @@
         "target": "ESNext",
         "baseUrl": "./",
         "paths": {
-            "*": ["types/*"]
+            "*": ["types/*"],
+            "cheerio": ["./node_modules/cheerio/lib/index.d.ts"]
         },
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "outDir": "./bin"
     },
     "ts-node": {
         "esm": true,

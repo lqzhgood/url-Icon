@@ -1,16 +1,24 @@
 {
     "name": "url-icon",
     "version": "1.0.0",
-    "description": "",
+    "description": ".url shortcut add and down .ico",
     "main": "index.ts",
     "type": "module",
+    "bin": {
+        "url-icon": "./bin/index.js"
+    },
     "scripts": {
         "dev": "nodemon ./index.ts",
-        "build": "ts-node ./index.ts"
+        "build": "tsc",
+        "npmPush": "npm publish",
+        "npmVersion": "npm version patch"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "keywords": [
+        ".url",
+        ".ico",
+        "shortcut",
+        "favicon.ico"
+    ],
     "dependencies": {
         "@types/axios": "^0.14.0",
         "@types/cheerio": "^0.22.31",
@@ -25,5 +33,15 @@
     "engines": {
         "node": ">=18.15.0",
         "npm": ">=9.6.1"
-    }
+    },
+    "bugs": {
+        "url": "https://github.com/lqzhgood/url-Icon/issues"
+    },
+    "homepage": "https://github.com/lqzhgood/url-Icon#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lqzhgood/url-Icon.git"
+    },
+    "author": "lqzh",
+    "license": "GPLv3"
 }
