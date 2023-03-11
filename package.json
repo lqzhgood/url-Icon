@@ -1,6 +1,6 @@
 {
     "name": "url-icon",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": ".url shortcut add and down .ico",
     "main": "index.ts",
     "type": "module",
