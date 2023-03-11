@@ -53,5 +53,5 @@ If someone is good at win32 programming, you can try to compile the following co
 
 ## Tips
 
-`.url` local icon may not be supported `.png`
-`.url` local icon may not be supported `relative paths`
+- `.url` local icon may not be supported `.png`
+- `.url` local icon may not be supported `relative paths`
