@@ -124,6 +124,13 @@ async function writeIconInfo(f: PathLike, t: string, iconFile: PathLike): Promis
     if (!iconFile) {
         lines.splice(i, 1);
     } else {
+        const iconPath =
+            CONFIG.pathType === 'resolve'
+                ? path.resolve(CONFIG.input, CONFIG.iconDir)
+                : path.relative(CONFIG.input, CONFIG.iconDir);
+
+        iconFile = path.join(iconPath, path.basename(iconFile as string));
+
         if (i !== -1) {
             lines[i] = `IconFile=${iconFile}`;
         } else {
