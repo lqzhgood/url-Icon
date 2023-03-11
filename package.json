@@ -10,8 +10,8 @@
     "scripts": {
         "dev": "nodemon ./index.ts",
         "build": "tsc",
-        "npmPush": "npm publish",
-        "npmVersion": "npm version patch"
+        "prenpmPush": "npm version patch",
+        "npmPush": "npm publish"
     },
     "keywords": [
         ".url",
