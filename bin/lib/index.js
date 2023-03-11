@@ -108,6 +108,10 @@ async function writeIconInfo(f, t, iconFile) {
         lines.splice(i, 1);
     }
     else {
+        const iconPath = CONFIG.pathType === 'resolve'
+            ? path.resolve(CONFIG.input, CONFIG.iconDir)
+            : path.relative(CONFIG.input, CONFIG.iconDir);
+        iconFile = path.join(iconPath, path.basename(iconFile));
         if (i !== -1) {
             lines[i] = `IconFile=${iconFile}`;
         }
