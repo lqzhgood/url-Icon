@@ -4,7 +4,7 @@ import path from 'node:path';
 import { getURL, handleIconFile, clear } from './lib/index.js';
 import CONFIG from './config.js';
 (async () => {
-    const files = await fs.readdir(CONFIG.input);
+    const files = (await fs.readdir(CONFIG.input)).filter(f => path.extname(f).toLowerCase() === '.url');
     const P = [];
     for (let i = 0; i < files.length; i++) {
         const f = path.join(CONFIG.input, files[i]);
