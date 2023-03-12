@@ -14,15 +14,7 @@ if website icon is `.png` `.svg`... , this repo will convert it to `.ico(64x64)`
 
 1. install nodejs `https://nodejs.org/`
 2. `cmd` run command `npm i url-icon -g`
-3. `cmd` run command `url-icon ${urlDir} ${iconDir} ${pathType}`
-
-    ```
-    pathType enum `['resolve', 'relative']`, default is `relative`
-
-    url-icon input icons resolve => `github.url`-> x:\xx\icons\github.ico
-    url-icon input icons => `github.url.url`-> ..\github.ico
-
-    ```
+3. `cmd` run command `url-icon ${urlDir} ${iconDir}`
 
 ### script
 
@@ -61,5 +53,5 @@ If someone is good at win32 programming, you can try to compile the following co
 
 ## Tips
 
--   `.url` local icon may not be supported `.png`
--   `.url` local icon may not be supported `relative paths`
+-   `.url` local icon maybe not supported `.png`
+-   `.url` local icon not supported `relative paths`

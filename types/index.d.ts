@@ -5,5 +5,5 @@ declare type DownRes = null | PathLike;
 declare interface IConfig {
     readonly input: string;
     readonly iconDir: string;
-    readonly pathType: string;
+    readonly pathType?: string;
 }
