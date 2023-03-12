@@ -58,4 +58,6 @@ If someone is good at win32 programming, you can try to compile the following co
 
 use taskbar to favorites
 
+> if windows 11, you can use [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher) to restore this feature of the taskbar ;)
+
 ![taskbar](./docs/taskbar.gif)
