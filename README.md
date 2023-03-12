@@ -55,3 +55,7 @@ If someone is good at win32 programming, you can try to compile the following co
 
 -   `.url` local icon maybe not supported `.png`
 -   `.url` local icon not supported `relative paths`
+
+use taskbar to favorites
+
+![taskbar](./docs/taskbar.gif)
