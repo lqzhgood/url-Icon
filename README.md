@@ -45,11 +45,17 @@ If you do not have any effect on the above operations, you can refer to the foll
 
 #### need help
 
+##### use command to run cleanmgr clean cache
+
 `d.e.` can't run by command
 
 If someone is good at win32 programming, you can try to compile the following code into `.exe`, and I can add it to the program to actively refresh the icon cache.
 
 [如何刷新 explorer.exe 图标缓存 \_ 码农的日常 (2023_3_11 11_07_09).html](<./docs/refreshCache/%E5%A6%82%E4%BD%95%E5%88%B7%E6%96%B0explorer.exe%E5%9B%BE%E6%A0%87%E7%BC%93%E5%AD%98%20_%20%E7%A0%81%E5%86%9C%E7%9A%84%E6%97%A5%E5%B8%B8%20(2023_3_11%2011_07_09).html>)
+
+##### IE Secret
+
+I tested that the icon cache can be refreshed in real time by dragging. `.url` to the `IE(not edge)` address bar. Does anyone know what `IE` does behind it?
 
 ## Tips
 
