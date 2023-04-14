@@ -63,9 +63,9 @@ async function downPageIcon(url) {
         const $ = cheerio.load(html);
         // shortcut icon 是不合规的 但是用这个可以精确匹配到 icon
         // MDN https://developer.mozilla.org/zh-CN/docs/Web/HTML/Attributes/rel#attr-icon
-        let ns = Array.from($('head link[rel="shortcut icon" i]'));
+        let ns = Array.from($('head link[href][rel="shortcut icon" i]'));
         if (ns.length == 0) {
-            ns = Array.from($('head link[rel="icon" i]'));
+            ns = Array.from($('head link[href][rel="icon" i]'));
         }
         if (ns.length === 0)
             return null;
@@ -77,15 +77,21 @@ async function downPageIcon(url) {
         else {
             // 比较 sizes
             // MDN https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link#attr-sizes
-            n = ns
-                .filter(n => $(n).attr('sizes'))
-                .reduce((pre, n) => {
-                const sz = $(n).attr('sizes');
-                const w = Number(sz.match(/(\d+)[xX](\d+)/)[1]);
-                const h = Number(sz.match(/(\d+)[xX](\d+)/)[2]);
-                const px = w * h;
-                return px > pre.px ? { px, n } : pre;
-            }, { px: 0, n: null }).n;
+            // 不止一个， 且至少有一个有 size 属性
+            ns = ns.filter(n => $(n).attr('sizes'));
+            n = ns.reduce((pre, n) => {
+                const sz = $(n).attr('sizes'); // 没有 sizes 的都被过滤掉了
+                const txt = sz.match(/(\d+)[xX](\d+)/);
+                if (txt) {
+                    const w = Number(txt[1]);
+                    const h = Number(txt[2]);
+                    const px = w * h;
+                    return px > pre.px ? { px, n } : pre;
+                }
+                else {
+                    return pre;
+                }
+            }, { px: 0, n: ns[0] }).n;
         }
         const fav_url = new URL($(n).attr('href'), url);
         const fav_href = fav_url.href;

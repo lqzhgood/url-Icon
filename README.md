@@ -21,7 +21,7 @@ if website icon is `.png` `.svg`... , this repo will convert it to `.ico(64x64)`
 1. install nodejs `https://nodejs.org/`
 2. `cmd` to current dir
 3. run `npm i` install dependencies
-4. put `.url` into `input` dir, or change `config.js`
+4. put `.url` into `input` dir, or change `./src/config.ts`
 5. `npm run build`
 6. (\*) refresh `explorer` icon cache
 

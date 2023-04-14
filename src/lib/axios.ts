@@ -5,7 +5,6 @@ import CONFIG from '../config.js';
 import axiosBase from 'axios';
 
 import { conversionIco, getHostname } from './index.js';
-import { PathLike } from 'node:fs';
 
 const axios = axiosBase.create({
     headers: {
@@ -16,7 +15,7 @@ const axios = axiosBase.create({
 });
 
 // icon 可能和页面不在同域下
-axios.down = async function (url: string, pageUrl?: string | URL): Promise<PathLike> {
+axios.down = async function (url, pageUrl?) {
     pageUrl = pageUrl || new URL(url);
 
     const resp = await axios.get(url, { responseType: 'arraybuffer' });

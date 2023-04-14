@@ -3,6 +3,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { getURL, handleIconFile, clear } from './lib/index.js';
 import CONFIG from './config.js';
+console.log('123', 123);
 (async () => {
     const files = (await fs.readdir(CONFIG.input)).filter(f => path.extname(f).toLowerCase() === '.url');
     const P = [];

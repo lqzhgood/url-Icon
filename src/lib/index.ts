@@ -1,5 +1,3 @@
-import { DownRes } from '../types/index.js';
-
 import { promises as fs, PathLike, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { URL } from 'node:url';
@@ -8,6 +6,8 @@ import iconGen from 'icon-gen';
 
 import axios from './axios.js';
 import CONFIG from '../config.js';
+
+type DownRes = null | PathLike;
 
 const ICONS_FILE = readdirSync(CONFIG.iconDir).map(f => ({ f: path.join(CONFIG.iconDir, f), n: 0 }));
 
@@ -71,10 +71,10 @@ async function downPageIcon(url: URL): Promise<DownRes> {
 
         // shortcut icon 是不合规的 但是用这个可以精确匹配到 icon
         // MDN https://developer.mozilla.org/zh-CN/docs/Web/HTML/Attributes/rel#attr-icon
-        let ns = Array.from($('head link[rel="shortcut icon" i]'));
+        let ns = Array.from($('head link[href][rel="shortcut icon" i]'));
 
         if (ns.length == 0) {
-            ns = Array.from($('head link[rel="icon" i]'));
+            ns = Array.from($('head link[href][rel="icon" i]'));
         }
 
         if (ns.length === 0) return null;
@@ -87,23 +87,30 @@ async function downPageIcon(url: URL): Promise<DownRes> {
         } else {
             // 比较 sizes
             // MDN https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/link#attr-sizes
-            n = ns
-                .filter(n => $(n).attr('sizes'))
-                .reduce(
-                    (pre, n) => {
-                        const sz = $(n).attr('sizes');
-                        const w = Number(sz.match(/(\d+)[xX](\d+)/)[1]);
-                        const h = Number(sz.match(/(\d+)[xX](\d+)/)[2]);
+
+            // 不止一个， 且至少有一个有 size 属性
+            ns = ns.filter(n => $(n).attr('sizes'));
+            n = ns.reduce(
+                (pre, n) => {
+                    const sz = $(n).attr('sizes') as string; // 没有 sizes 的都被过滤掉了
+
+                    const txt = sz.match(/(\d+)[xX](\d+)/);
+
+                    if (txt) {
+                        const w = Number(txt[1]);
+                        const h = Number(txt[2]);
 
                         const px = w * h;
-
                         return px > pre.px ? { px, n } : pre;
-                    },
-                    { px: 0, n: null },
-                ).n;
+                    } else {
+                        return pre;
+                    }
+                },
+                { px: 0, n: ns[0] },
+            ).n;
         }
 
-        const fav_url = new URL($(n).attr('href'), url);
+        const fav_url = new URL($(n).attr('href') as string, url);
         const fav_href = fav_url.href;
 
         const p = await axios.down(fav_href, url);
