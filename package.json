@@ -14,7 +14,7 @@
         "dev": "nodemon -e 'ts' --exec \"node --inspect --loader ts-node/esm\"  ./src/index.ts",
         "build": "tsc",
         "postbuild": "npm version patch",
-        "npmPush": "npm run build && npm publish"
+        "npmPush": "npm run postbuild && npm publish"
     },
     "keywords": [
         ".url",
