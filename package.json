@@ -13,8 +13,8 @@
     "scripts": {
         "dev": "nodemon -e 'ts' --exec \"node --inspect --loader ts-node/esm\"  ./src/index.ts",
         "build": "tsc",
-        "postbuild": "npm version patch",
-        "npmPush": "npm run postbuild && npm publish"
+        "version": "npm version patch",
+        "push": "npm publish"
     },
     "keywords": [
         ".url",
