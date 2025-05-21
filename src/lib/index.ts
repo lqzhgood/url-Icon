@@ -1,7 +1,7 @@
 import { promises as fs, PathLike, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { URL } from 'node:url';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import iconGen from 'icon-gen';
 
 import axios from './axios.js';
@@ -9,7 +9,10 @@ import CONFIG from '../config.js';
 
 type DownRes = null | PathLike;
 
-const ICONS_FILE = readdirSync(CONFIG.iconDir).map(f => ({ f: path.join(CONFIG.iconDir, f), n: 0 }));
+const ICONS_FILE = readdirSync(CONFIG.iconDir).map(f => ({
+    f: path.join(CONFIG.iconDir, f),
+    n: 0,
+}));
 
 export function getURL(t: string): null | URL {
     const u = t.match(/(?<=^URL=).+$/gim);
@@ -18,7 +21,11 @@ export function getURL(t: string): null | URL {
     return new URL(u[0]);
 }
 
-export async function handleIconFile(f: PathLike, t: string, url: URL): Promise<void> {
+export async function handleIconFile(
+    f: PathLike,
+    t: string,
+    url: URL
+): Promise<void> {
     const find = ICONS_FILE.find(({ f, n }) => f.includes(getHostname(url)));
     if (find) {
         // 找到相同 hostname 直接写入文件
@@ -79,7 +86,7 @@ async function downPageIcon(url: URL): Promise<DownRes> {
 
         if (ns.length === 0) return null;
 
-        let n: cheerio.Element;
+        let n;
 
         // 如果只有一个 或者 每一个标签都没有 sizes 属性 拿第一个
         if (ns.length === 1 || ns.every(n => !$(n).attr('sizes'))) {
@@ -106,7 +113,7 @@ async function downPageIcon(url: URL): Promise<DownRes> {
                         return pre;
                     }
                 },
-                { px: 0, n: ns[0] },
+                { px: 0, n: ns[0] }
             ).n;
         }
 
@@ -119,7 +126,11 @@ async function downPageIcon(url: URL): Promise<DownRes> {
         return null;
     }
 }
-async function writeIconInfo(f: PathLike, t: string, iconFile: PathLike): Promise<void> {
+async function writeIconInfo(
+    f: PathLike,
+    t: string,
+    iconFile: PathLike
+): Promise<void> {
     const lines = t.split(/\n/);
 
     // IconFile
@@ -176,7 +187,10 @@ export async function clear(): Promise<void> {
 
 export async function conversionIco(f: string): Promise<boolean> {
     const { dir, name } = path.parse(f);
-    await (iconGen as any)(f, dir, { report: false, ico: { name: name, sizes: [64] } });
+    await (iconGen as any)(f, dir, {
+        report: false,
+        ico: { name: name, sizes: [64] },
+    });
     await fs.unlink(f);
     return true;
 }
