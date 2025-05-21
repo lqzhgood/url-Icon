@@ -1,11 +1,14 @@
 import { promises as fs, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { URL } from 'node:url';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import iconGen from 'icon-gen';
 import axios from './axios.js';
 import CONFIG from '../config.js';
-const ICONS_FILE = readdirSync(CONFIG.iconDir).map(f => ({ f: path.join(CONFIG.iconDir, f), n: 0 }));
+const ICONS_FILE = readdirSync(CONFIG.iconDir).map(f => ({
+    f: path.join(CONFIG.iconDir, f),
+    n: 0,
+}));
 export function getURL(t) {
     const u = t.match(/(?<=^URL=).+$/gim);
     if (!u)
@@ -155,7 +158,10 @@ export async function clear() {
 }
 export async function conversionIco(f) {
     const { dir, name } = path.parse(f);
-    await iconGen(f, dir, { report: false, ico: { name: name, sizes: [64] } });
+    await iconGen(f, dir, {
+        report: false,
+        ico: { name: name, sizes: [64] },
+    });
     await fs.unlink(f);
     return true;
 }
